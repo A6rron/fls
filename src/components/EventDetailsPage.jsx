@@ -6,6 +6,8 @@ const EventDetailsPage = ({ eventId, onBack }) => {
   const [event, setEvent] = useState(null);
   const [fundData, setFundData] = useState(null);
   const [currentFilter, setCurrentFilter] = useState('all');
+  const [showReceipt, setShowReceipt] = useState(false);
+  const [currentReceipt, setCurrentReceipt] = useState('');
 
   useEffect(() => {
     if (eventId) {
@@ -230,6 +232,21 @@ const EventDetailsPage = ({ eventId, onBack }) => {
                             Paid by: {transaction.volunteer}
                           </span>
                         )}
+                        {transaction.type === 'expense' && (
+                          <button 
+                            className="block mt-1 text-xs font-mono text-white opacity-60 hover:opacity-100 transition-opacity duration-200 cursor-pointer"
+                            onClick={() => {
+                              if (transaction.receipt) {
+                                setCurrentReceipt(transaction.receipt);
+                                setShowReceipt(true);
+                              } else {
+                                alert('Receipt not available for this transaction');
+                              }
+                            }}
+                          >
+                            view receipt
+                          </button>
+                        )}
                       </td>
                       <td className="px-4 py-4 text-sm border-b border-[rgba(255,255,255,0.05)]">
                         <span className="inline-block px-3.5 py-1.5 rounded-full text-xs font-semibold bg-[rgba(74,158,255,0.2)] text-accent-blue">
@@ -249,6 +266,41 @@ const EventDetailsPage = ({ eventId, onBack }) => {
           )}
         </div>
       </div>
+
+      {/* Receipt Popup Modal */}
+      {showReceipt && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4"
+          onClick={() => setShowReceipt(false)}
+        >
+          <div 
+            className="bg-card-bg backdrop-blur-glass rounded-3xl shadow-[0_8px_30px_rgba(0,0,0,0.8)] border border-card-border p-8 max-w-md w-full"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="text-xl font-bold text-text-primary">Receipt Details</h3>
+              <button 
+                onClick={() => setShowReceipt(false)}
+                className="text-text-secondary hover:text-text-primary transition-colors"
+              >
+                <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+            </div>
+            <pre className="text-sm font-mono text-white whitespace-pre-wrap bg-[rgba(0,0,0,0.3)] p-4 rounded-xl border border-[rgba(255,255,255,0.1)]">
+              {currentReceipt}
+            </pre>
+            <button 
+              onClick={() => setShowReceipt(false)}
+              className="mt-6 w-full px-4 py-3 bg-gradient-to-br from-accent-blue to-accent-slate text-white rounded-xl font-medium transition-all duration-300 hover:shadow-[0_6px_20px_rgba(74,158,255,0.4)] hover:-translate-y-0.5"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
