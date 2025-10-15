@@ -489,8 +489,42 @@ body {
     font-size: 1.125rem;
     color: var(--text-secondary);
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     font-weight: 400;
+}
+
+.cashbook-info {
+    max-width: 800px;
+    margin: 3rem auto 0;
+    padding: 1.25rem 1.75rem;
+    background: rgba(74, 158, 255, 0.1);
+    border: 1px solid rgba(74, 158, 255, 0.3);
+    border-radius: 1rem;
+    text-align: center;
+}
+
+.cashbook-text {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.cashbook-text strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.cashbook-link {
+    color: var(--accent-blue);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    border-bottom: 1px solid transparent;
+}
+
+.cashbook-link:hover {
+    color: var(--text-primary);
+    border-bottom-color: var(--accent-blue);
 }
 
 .workflow-diagram {
@@ -1438,6 +1472,15 @@ body {
 .transaction-description {
     color: var(--text-primary);
     font-weight: 500;
+}
+
+.volunteer-name {
+    display: inline-block;
+    margin-top: 4px;
+    font-size: 0.875rem;
+    color: var(--accent-blue);
+    font-weight: 400;
+    font-style: italic;
 }
 
 .transaction-category {

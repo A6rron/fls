@@ -10,6 +10,14 @@ The **Fund & Ledger System** brings complete financial transparency to college e
 - Maintaining complete financial records
 - Showcasing college events with detailed fund information
 
+## 💳 Financial Backend - Cashbook
+
+FLS uses **[Cashbook](https://cashbook.in/)** as its financial backend for:
+- **Receiving Donations**: All donations are received in the main Cashbook account
+- **Volunteer Wallets**: Each volunteer is provided with a Cashbook wallet for managing event expenses
+- **Transaction Tracking**: Every expense transaction shows which volunteer made the payment
+- **Real-time Sync**: Financial data is synced from Cashbook to provide transparent reporting
+
 ## ✨ Features
 
 - **Landing Page**: Introduction to FLS with key features and benefits
@@ -56,6 +64,17 @@ public/
 ├── app.js          # Application logic with local data
 └── README.md       # This file
 ```
+
+## 🔗 Cashbook Integration
+
+The system integrates with Cashbook for complete financial management:
+
+### How It Works:
+1. **Donations Flow**: All donations and sponsorships are received in the main Cashbook account
+2. **Wallet Allocation**: Event organizers allocate funds to volunteer Cashbook wallets
+3. **Expense Tracking**: Volunteers make payments using their Cashbook wallets
+4. **Attribution**: Each transaction in expenses shows which volunteer made the payment
+5. **Transparency**: All transactions are visible in FLS for complete accountability
 
 ## 📊 Sample Data
 

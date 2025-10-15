@@ -1,8 +1,17 @@
 // Pure HTML/CSS/JS - No external dependencies
 // All data is stored locally in this file
 
+// ============================================
+// FINANCIAL BACKEND: CASHBOOK (https://cashbook.in/)
+// ============================================
+// FLS uses Cashbook as the financial backend:
+// 1. Donations are received in the main Cashbook account
+// 2. Volunteers are provided with Cashbook wallets
+// 3. Each expense transaction shows which volunteer made the payment
+// 4. All financial data is synced from Cashbook API to FLS
+//
 // Mock Data for Fund Information (Simulates Cashbook API Response)
-// In production, this data comes from Cashbook/Enkash API
+// In production, this data comes from Cashbook API
 const FUND_DATA = {
     CB2025001: {
         fundsRaised: 85000,
@@ -12,9 +21,9 @@ const FUND_DATA = {
             { id: '1', date: '2025-09-01', description: 'Student Union Fund Allocation', type: 'income', amount: 50000, category: 'Union Budget' },
             { id: '2', date: '2025-09-15', description: 'Corporate Sponsorship - TCS', type: 'income', amount: 25000, category: 'Sponsorship' },
             { id: '3', date: '2025-09-20', description: 'Student Donations', type: 'income', amount: 10000, category: 'Donations' },
-            { id: '4', date: '2025-10-01', description: 'Stage & Sound System', type: 'expense', amount: 20000, category: 'Infrastructure' },
-            { id: '5', date: '2025-10-05', description: 'Celebrity Performance', type: 'expense', amount: 30000, category: 'Entertainment' },
-            { id: '6', date: '2025-10-08', description: 'Food & Catering', type: 'expense', amount: 12000, category: 'Catering' },
+            { id: '4', date: '2025-10-01', description: 'Stage & Sound System', type: 'expense', amount: 20000, category: 'Infrastructure', volunteer: 'Rahul Kumar' },
+            { id: '5', date: '2025-10-05', description: 'Celebrity Performance', type: 'expense', amount: 30000, category: 'Entertainment', volunteer: 'Priya Sharma' },
+            { id: '6', date: '2025-10-08', description: 'Food & Catering', type: 'expense', amount: 12000, category: 'Catering', volunteer: 'Amit Patel' },
         ],
     },
     CB2025002: {
@@ -25,10 +34,10 @@ const FUND_DATA = {
             { id: '1', date: '2025-08-10', description: 'College Administration Grant', type: 'income', amount: 80000, category: 'College Fund' },
             { id: '2', date: '2025-08-20', description: 'Alumni Contributions', type: 'income', amount: 30000, category: 'Alumni' },
             { id: '3', date: '2025-08-25', description: 'Entry Tickets', type: 'income', amount: 15000, category: 'Tickets' },
-            { id: '4', date: '2025-09-01', description: 'Venue Decoration', type: 'expense', amount: 18000, category: 'Decor' },
-            { id: '5', date: '2025-09-10', description: 'Cultural Programs', type: 'expense', amount: 35000, category: 'Programs' },
-            { id: '6', date: '2025-09-15', description: 'Prizes & Awards', type: 'expense', amount: 25000, category: 'Prizes' },
-            { id: '7', date: '2025-09-18', description: 'Marketing & Publicity', type: 'expense', amount: 20000, category: 'Marketing' },
+            { id: '4', date: '2025-09-01', description: 'Venue Decoration', type: 'expense', amount: 18000, category: 'Decor', volunteer: 'Sneha Reddy' },
+            { id: '5', date: '2025-09-10', description: 'Cultural Programs', type: 'expense', amount: 35000, category: 'Programs', volunteer: 'Arjun Menon' },
+            { id: '6', date: '2025-09-15', description: 'Prizes & Awards', type: 'expense', amount: 25000, category: 'Prizes', volunteer: 'Kavya Nair' },
+            { id: '7', date: '2025-09-18', description: 'Marketing & Publicity', type: 'expense', amount: 20000, category: 'Marketing', volunteer: 'Rohit Singh' },
         ],
     },
     CB2025003: {
@@ -38,10 +47,10 @@ const FUND_DATA = {
         transactions: [
             { id: '1', date: '2025-10-01', description: 'Department Budget', type: 'income', amount: 30000, category: 'Department Fund' },
             { id: '2', date: '2025-10-10', description: 'Student Contributions', type: 'income', amount: 15000, category: 'Student Fund' },
-            { id: '3', date: '2025-10-15', description: 'Technical Equipment Rental', type: 'expense', amount: 12000, category: 'Equipment' },
-            { id: '4', date: '2025-10-18', description: 'Guest Speaker Honorarium', type: 'expense', amount: 8000, category: 'Speakers' },
-            { id: '5', date: '2025-10-20', description: 'Event Supplies', type: 'expense', amount: 10000, category: 'Supplies' },
-            { id: '6', date: '2025-10-22', description: 'Refreshments', type: 'expense', amount: 8000, category: 'Catering' },
+            { id: '3', date: '2025-10-15', description: 'Technical Equipment Rental', type: 'expense', amount: 12000, category: 'Equipment', volunteer: 'Aditya Verma' },
+            { id: '4', date: '2025-10-18', description: 'Guest Speaker Honorarium', type: 'expense', amount: 8000, category: 'Speakers', volunteer: 'Neha Gupta' },
+            { id: '5', date: '2025-10-20', description: 'Event Supplies', type: 'expense', amount: 10000, category: 'Supplies', volunteer: 'Karthik Iyer' },
+            { id: '6', date: '2025-10-22', description: 'Refreshments', type: 'expense', amount: 8000, category: 'Catering', volunteer: 'Divya Krishnan' },
         ],
     },
     CB2025004: {
@@ -52,11 +61,11 @@ const FUND_DATA = {
             { id: '1', date: '2025-07-01', description: 'College Annual Fund', type: 'income', amount: 100000, category: 'College Budget' },
             { id: '2', date: '2025-07-15', description: 'Corporate Sponsors', type: 'income', amount: 50000, category: 'Sponsorship' },
             { id: '3', date: '2025-07-20', description: 'Student Fundraising', type: 'income', amount: 30000, category: 'Fundraising' },
-            { id: '4', date: '2025-08-01', description: 'Main Stage Setup', type: 'expense', amount: 40000, category: 'Infrastructure' },
-            { id: '5', date: '2025-08-10', description: 'Artist Performances', type: 'expense', amount: 50000, category: 'Entertainment' },
-            { id: '6', date: '2025-08-15', description: 'Security & Management', type: 'expense', amount: 20000, category: 'Security' },
-            { id: '7', date: '2025-08-18', description: 'Food Stalls & Catering', type: 'expense', amount: 25000, category: 'Catering' },
-            { id: '8', date: '2025-08-20', description: 'Miscellaneous', type: 'expense', amount: 10000, category: 'Others' },
+            { id: '4', date: '2025-08-01', description: 'Main Stage Setup', type: 'expense', amount: 40000, category: 'Infrastructure', volunteer: 'Vikram Joshi' },
+            { id: '5', date: '2025-08-10', description: 'Artist Performances', type: 'expense', amount: 50000, category: 'Entertainment', volunteer: 'Anjali Desai' },
+            { id: '6', date: '2025-08-15', description: 'Security & Management', type: 'expense', amount: 20000, category: 'Security', volunteer: 'Suresh Pillai' },
+            { id: '7', date: '2025-08-18', description: 'Food Stalls & Catering', type: 'expense', amount: 25000, category: 'Catering', volunteer: 'Meera Thomas' },
+            { id: '8', date: '2025-08-20', description: 'Miscellaneous', type: 'expense', amount: 10000, category: 'Others', volunteer: 'Ravi Kapoor' },
         ],
     },
     CB2025005: {
@@ -66,10 +75,10 @@ const FUND_DATA = {
         transactions: [
             { id: '1', date: '2025-11-01', description: 'Department Allocation', type: 'income', amount: 20000, category: 'Department' },
             { id: '2', date: '2025-11-05', description: 'Student Participation Fee', type: 'income', amount: 15000, category: 'Registration' },
-            { id: '3', date: '2025-11-10', description: 'Venue Booking', type: 'expense', amount: 8000, category: 'Venue' },
-            { id: '4', date: '2025-11-12', description: 'Equipment & Materials', type: 'expense', amount: 12000, category: 'Equipment' },
-            { id: '5', date: '2025-11-15', description: 'Refreshments', type: 'expense', amount: 5000, category: 'Catering' },
-            { id: '6', date: '2025-11-18', description: 'Certificates & Prizes', type: 'expense', amount: 3000, category: 'Awards' },
+            { id: '3', date: '2025-11-10', description: 'Venue Booking', type: 'expense', amount: 8000, category: 'Venue', volunteer: 'Sanjay Rao' },
+            { id: '4', date: '2025-11-12', description: 'Equipment & Materials', type: 'expense', amount: 12000, category: 'Equipment', volunteer: 'Pooja Mehta' },
+            { id: '5', date: '2025-11-15', description: 'Refreshments', type: 'expense', amount: 5000, category: 'Catering', volunteer: 'Akash Shetty' },
+            { id: '6', date: '2025-11-18', description: 'Certificates & Prizes', type: 'expense', amount: 3000, category: 'Awards', volunteer: 'Lakshmi Nambiar' },
         ],
     },
 };
@@ -180,7 +189,10 @@ function renderFilteredTransactions() {
         transactionsBody.innerHTML = filteredTransactions.map(transaction => `
             <tr>
                 <td class="transaction-date">${formatDateLong(transaction.date)}</td>
-                <td class="transaction-description">${transaction.description}</td>
+                <td class="transaction-description">
+                    ${transaction.description}
+                    ${transaction.type === 'expense' && transaction.volunteer ? `<br><span class="volunteer-name">Paid by: ${transaction.volunteer}</span>` : ''}
+                </td>
                 <td>
                     <span class="transaction-category">${transaction.category}</span>
                 </td>
@@ -205,6 +217,12 @@ function navigateTo(view) {
 function showPage(view) {
     document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
     document.getElementById(`${view}-page`).classList.add('active');
+    
+    // Show footer only on landing page
+    const footer = document.querySelector('.footer');
+    if (footer) {
+        footer.style.display = view === 'landing' ? 'block' : 'none';
+    }
 }
 
 function updateNavbar() {

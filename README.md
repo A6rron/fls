@@ -29,6 +29,14 @@ public/
 - Fully responsive design
 - **No dependencies, no build tools!**
 
+## 💳 Financial Backend
+
+FLS uses **[Cashbook](https://cashbook.in/)** as the financial backend:
+- Donations received in main Cashbook account
+- Cashbook wallets provided to volunteers
+- Transaction attribution showing who made each payment
+- Real-time financial transparency
+
 ## 👥 Credits
 
 **A project by MESMX** - Tech Community from MES College Marampally
