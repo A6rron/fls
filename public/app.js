@@ -79,6 +79,8 @@ let currentView = 'landing';
 let events = [];
 let selectedEventId = null;
 let fundDataCache = {};
+let currentTransactionFilter = 'all';
+let currentEventTransactions = [];
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
@@ -108,57 +110,85 @@ function setupEventListeners() {
     // Details page
     document.getElementById('back-btn').addEventListener('click', () => navigateTo('events'));
 
-    // Trackpad gesture support for back navigation
-    setupGestureNavigation();
+    // Transaction filter buttons
+    setupTransactionFilters();
+
+    // Stat card click handlers
+    document.getElementById('funds-raised-card').addEventListener('click', () => filterTransactions('income'));
+    document.getElementById('expenses-card').addEventListener('click', () => filterTransactions('expense'));
 }
 
-function setupGestureNavigation() {
-    let touchStartX = 0;
-    let touchEndX = 0;
+function setupTransactionFilters() {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    filterButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const filter = e.target.getAttribute('data-filter');
+            filterTransactions(filter);
+        });
+    });
+}
+
+function filterTransactions(filter) {
+    currentTransactionFilter = filter;
     
-    document.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
-    
-    document.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].screenX;
-        handleGesture();
-    }, { passive: true });
-    
-    // For trackpad gestures on desktop
-    let wheelDeltaX = 0;
-    let gestureTimeout = null;
-    
-    document.addEventListener('wheel', (e) => {
-        // Detect horizontal swipe on trackpad
-        if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
-            wheelDeltaX += e.deltaX;
-            
-            clearTimeout(gestureTimeout);
-            gestureTimeout = setTimeout(() => {
-                if (wheelDeltaX < -100) {
-                    // Swipe right (back gesture)
-                    handleBackGesture();
-                }
-                wheelDeltaX = 0;
-            }, 100);
+    // Update active button
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.getAttribute('data-filter') === filter) {
+            btn.classList.add('active');
         }
-    }, { passive: true });
+    });
     
-    function handleGesture() {
-        const swipeDistance = touchEndX - touchStartX;
-        if (swipeDistance > 100) {
-            // Swipe right (back gesture)
-            handleBackGesture();
-        }
+    // Filter and render transactions
+    renderFilteredTransactions();
+    
+    // Scroll to transactions section
+    document.querySelector('.transactions-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function renderFilteredTransactions() {
+    const transactionsBody = document.getElementById('transactions-body');
+    const noTransactions = document.getElementById('no-transactions');
+    const tableWrapper = document.getElementById('transactions-table-wrapper');
+    const titleElement = document.getElementById('transactions-main-title');
+    
+    // Filter transactions based on current filter
+    let filteredTransactions = currentEventTransactions;
+    if (currentTransactionFilter === 'income') {
+        filteredTransactions = currentEventTransactions.filter(t => t.type === 'income');
+        titleElement.textContent = 'Funds Raised - Detailed Transactions';
+    } else if (currentTransactionFilter === 'expense') {
+        filteredTransactions = currentEventTransactions.filter(t => t.type === 'expense');
+        titleElement.textContent = 'Expenses - Detailed Transactions';
+    } else {
+        titleElement.textContent = 'Transaction Summary';
     }
     
-    function handleBackGesture() {
-        if (currentView === 'details') {
-            navigateTo('events');
-        } else if (currentView === 'events') {
-            navigateTo('landing');
+    if (filteredTransactions.length === 0) {
+        noTransactions.style.display = 'block';
+        tableWrapper.style.display = 'none';
+        if (currentTransactionFilter === 'income') {
+            noTransactions.querySelector('p').textContent = 'No funds raised transactions recorded yet.';
+        } else if (currentTransactionFilter === 'expense') {
+            noTransactions.querySelector('p').textContent = 'No expense transactions recorded yet.';
+        } else {
+            noTransactions.querySelector('p').textContent = 'No transactions recorded yet.';
         }
+    } else {
+        noTransactions.style.display = 'none';
+        tableWrapper.style.display = 'block';
+        transactionsBody.innerHTML = filteredTransactions.map(transaction => `
+            <tr>
+                <td class="transaction-date">${formatDateLong(transaction.date)}</td>
+                <td class="transaction-description">${transaction.description}</td>
+                <td>
+                    <span class="transaction-category">${transaction.category}</span>
+                </td>
+                <td class="transaction-amount ${transaction.type}">
+                    ${transaction.type === 'income' ? '+' : '-'}${formatCurrency(transaction.amount)}
+                </td>
+            </tr>
+        `).join('');
     }
 }
 
@@ -499,30 +529,20 @@ function viewEventDetails(eventId) {
     document.getElementById('stat-expenses').textContent = formatCurrency(fundData.expenses);
     document.getElementById('stat-balance').textContent = formatCurrency(fundData.remainingBalance);
 
-    // Update transactions
-    const transactionsBody = document.getElementById('transactions-body');
-    const noTransactions = document.getElementById('no-transactions');
-    const tableWrapper = document.getElementById('transactions-table-wrapper');
-
-    if (fundData.transactions.length === 0) {
-        noTransactions.style.display = 'block';
-        tableWrapper.style.display = 'none';
-    } else {
-        noTransactions.style.display = 'none';
-        tableWrapper.style.display = 'block';
-        transactionsBody.innerHTML = fundData.transactions.map(transaction => `
-            <tr>
-                <td class="transaction-date">${formatDateLong(transaction.date)}</td>
-                <td class="transaction-description">${transaction.description}</td>
-                <td>
-                    <span class="transaction-category">${transaction.category}</span>
-                </td>
-                <td class="transaction-amount ${transaction.type}">
-                    ${transaction.type === 'income' ? '+' : '-'}${formatCurrency(transaction.amount)}
-                </td>
-            </tr>
-        `).join('');
-    }
+    // Store current event transactions and reset filter
+    currentEventTransactions = fundData.transactions;
+    currentTransactionFilter = 'all';
+    
+    // Reset filter buttons
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.getAttribute('data-filter') === 'all') {
+            btn.classList.add('active');
+        }
+    });
+    
+    // Render all transactions initially
+    renderFilteredTransactions();
 
     navigateTo('details');
 }

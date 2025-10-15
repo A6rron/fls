@@ -173,20 +173,24 @@
                                 </div>
                             </div>
 
-                            <!-- About Section -->
-                            <div class="about-section">
-                                <div class="about-content">
-                                    <h2 class="about-title">Transparent fund management for college events</h2>
-                                    <p class="about-description">
-                                        FLS brings complete transparency to event financing. Track funds, expenses, and balances in real-time — empowering organizers and building trust.
-                                    </p>
-                                </div>
+                    <!-- Transparency Highlight Section -->
+                    <div class="transparency-highlight">
+                        <div class="transparency-content">
+                            <div class="transparency-icon-wrapper">
+                                <svg class="transparency-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                </svg>
                             </div>
+                            <h2 class="transparency-title">Transparent fund management for college events</h2>
+                            <p class="transparency-description">FLS brings complete transparency to event financing. Track funds, expenses, and balances in real-time — empowering organizers and building trust.</p>
+                        </div>
+                    </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
 
         <!-- Events Page -->
         <div id="events-page" class="page">
@@ -304,7 +308,7 @@
                     </div>
 
                     <div class="stats-grid">
-                        <div class="stat-card">
+                        <div class="stat-card stat-card-clickable" id="funds-raised-card">
                             <div class="stat-header">
                                 <p class="stat-label">Funds Raised</p>
                                 <svg class="icon-sm text-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -313,9 +317,10 @@
                                 </svg>
                             </div>
                             <p id="stat-raised" class="stat-value"></p>
+                            <p class="stat-hint">Click to view details</p>
                         </div>
 
-                        <div class="stat-card">
+                        <div class="stat-card stat-card-clickable" id="expenses-card">
                             <div class="stat-header">
                                 <p class="stat-label">Expenses</p>
                                 <svg class="icon-sm text-red" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -324,6 +329,7 @@
                                 </svg>
                             </div>
                             <p id="stat-expenses" class="stat-value"></p>
+                            <p class="stat-hint">Click to view details</p>
                         </div>
 
                         <div class="stat-card">
@@ -339,7 +345,14 @@
                     </div>
 
                     <div class="transactions-card">
-                        <h2 class="transactions-title">Transaction Summary</h2>
+                        <div class="transactions-header">
+                            <h2 class="transactions-title" id="transactions-main-title">Transaction Summary</h2>
+                            <div class="transaction-filters" id="transaction-filters">
+                                <button class="filter-btn active" data-filter="all">All</button>
+                                <button class="filter-btn" data-filter="income">Funds Raised</button>
+                                <button class="filter-btn" data-filter="expense">Expenses</button>
+                            </div>
+                        </div>
                         <div id="no-transactions" class="no-transactions" style="display: none;">
                             <p>No transactions recorded yet.</p>
                         </div>
