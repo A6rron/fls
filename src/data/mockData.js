@@ -1,0 +1,252 @@
+// Mock Data for Fund Information (Simulates Cashbook API Response)
+export const FUND_DATA = {
+  CB2025001: {
+    fundsRaised: 85000,
+    expenses: 62000,
+    remainingBalance: 23000,
+    transactions: [
+      { id: '1', date: '2025-09-01', description: 'Student Union Fund Allocation', type: 'income', amount: 50000, category: 'Union Budget' },
+      { id: '2', date: '2025-09-15', description: 'Corporate Sponsorship - TCS', type: 'income', amount: 25000, category: 'Sponsorship' },
+      { id: '3', date: '2025-09-20', description: 'Student Donations', type: 'income', amount: 10000, category: 'Donations' },
+      { id: '4', date: '2025-10-01', description: 'Stage & Sound System', type: 'expense', amount: 20000, category: 'Infrastructure', volunteer: 'Rahul Kumar' },
+      { id: '5', date: '2025-10-05', description: 'Celebrity Performance', type: 'expense', amount: 30000, category: 'Entertainment', volunteer: 'Priya Sharma' },
+      { id: '6', date: '2025-10-08', description: 'Food & Catering', type: 'expense', amount: 12000, category: 'Catering', volunteer: 'Amit Patel' },
+    ],
+  },
+  CB2025002: {
+    fundsRaised: 125000,
+    expenses: 98000,
+    remainingBalance: 27000,
+    transactions: [
+      { id: '1', date: '2025-08-10', description: 'College Administration Grant', type: 'income', amount: 80000, category: 'College Fund' },
+      { id: '2', date: '2025-08-20', description: 'Alumni Contributions', type: 'income', amount: 30000, category: 'Alumni' },
+      { id: '3', date: '2025-08-25', description: 'Entry Tickets', type: 'income', amount: 15000, category: 'Tickets' },
+      { id: '4', date: '2025-09-01', description: 'Venue Decoration', type: 'expense', amount: 18000, category: 'Decor', volunteer: 'Sneha Reddy' },
+      { id: '5', date: '2025-09-10', description: 'Cultural Programs', type: 'expense', amount: 35000, category: 'Programs', volunteer: 'Arjun Menon' },
+      { id: '6', date: '2025-09-15', description: 'Prizes & Awards', type: 'expense', amount: 25000, category: 'Prizes', volunteer: 'Kavya Nair' },
+      { id: '7', date: '2025-09-18', description: 'Marketing & Publicity', type: 'expense', amount: 20000, category: 'Marketing', volunteer: 'Rohit Singh' },
+    ],
+  },
+  CB2025003: {
+    fundsRaised: 45000,
+    expenses: 38000,
+    remainingBalance: 7000,
+    transactions: [
+      { id: '1', date: '2025-10-01', description: 'Department Budget', type: 'income', amount: 30000, category: 'Department Fund' },
+      { id: '2', date: '2025-10-10', description: 'Student Contributions', type: 'income', amount: 15000, category: 'Student Fund' },
+      { id: '3', date: '2025-10-15', description: 'Technical Equipment Rental', type: 'expense', amount: 12000, category: 'Equipment', volunteer: 'Aditya Verma' },
+      { id: '4', date: '2025-10-18', description: 'Guest Speaker Honorarium', type: 'expense', amount: 8000, category: 'Speakers', volunteer: 'Neha Gupta' },
+      { id: '5', date: '2025-10-20', description: 'Event Supplies', type: 'expense', amount: 10000, category: 'Supplies', volunteer: 'Karthik Iyer' },
+      { id: '6', date: '2025-10-22', description: 'Refreshments', type: 'expense', amount: 8000, category: 'Catering', volunteer: 'Divya Krishnan' },
+    ],
+  },
+  CB2025004: {
+    fundsRaised: 180000,
+    expenses: 145000,
+    remainingBalance: 35000,
+    transactions: [
+      { id: '1', date: '2025-07-01', description: 'College Annual Fund', type: 'income', amount: 100000, category: 'College Budget' },
+      { id: '2', date: '2025-07-15', description: 'Corporate Sponsors', type: 'income', amount: 50000, category: 'Sponsorship' },
+      { id: '3', date: '2025-07-20', description: 'Student Fundraising', type: 'income', amount: 30000, category: 'Fundraising' },
+      { id: '4', date: '2025-08-01', description: 'Main Stage Setup', type: 'expense', amount: 40000, category: 'Infrastructure', volunteer: 'Vikram Joshi' },
+      { id: '5', date: '2025-08-10', description: 'Artist Performances', type: 'expense', amount: 50000, category: 'Entertainment', volunteer: 'Anjali Desai' },
+      { id: '6', date: '2025-08-15', description: 'Security & Management', type: 'expense', amount: 20000, category: 'Security', volunteer: 'Suresh Pillai' },
+      { id: '7', date: '2025-08-18', description: 'Food Stalls & Catering', type: 'expense', amount: 25000, category: 'Catering', volunteer: 'Meera Thomas' },
+      { id: '8', date: '2025-08-20', description: 'Miscellaneous', type: 'expense', amount: 10000, category: 'Others', volunteer: 'Ravi Kapoor' },
+    ],
+  },
+  CB2025005: {
+    fundsRaised: 35000,
+    expenses: 28000,
+    remainingBalance: 7000,
+    transactions: [
+      { id: '1', date: '2025-11-01', description: 'Department Allocation', type: 'income', amount: 20000, category: 'Department' },
+      { id: '2', date: '2025-11-05', description: 'Student Participation Fee', type: 'income', amount: 15000, category: 'Registration' },
+      { id: '3', date: '2025-11-10', description: 'Venue Booking', type: 'expense', amount: 8000, category: 'Venue', volunteer: 'Sanjay Rao' },
+      { id: '4', date: '2025-11-12', description: 'Equipment & Materials', type: 'expense', amount: 12000, category: 'Equipment', volunteer: 'Pooja Mehta' },
+      { id: '5', date: '2025-11-15', description: 'Refreshments', type: 'expense', amount: 5000, category: 'Catering', volunteer: 'Akash Shetty' },
+      { id: '6', date: '2025-11-18', description: 'Certificates & Prizes', type: 'expense', amount: 3000, category: 'Awards', volunteer: 'Lakshmi Nambiar' },
+    ],
+  },
+};
+
+export const MOCK_EVENTS = [
+  {
+    id: '1',
+    title: 'Union Day 2025',
+    description: 'Annual student union celebration with cultural programs, competitions, and entertainment. A day-long event celebrating student unity and college spirit.',
+    type: 'College Event',
+    status: 'Upcoming',
+    date: '2025-10-20',
+    team: 'Student Union',
+    cashbook_id: 'CB2025001',
+    media: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800',
+    created_at: '2025-09-01',
+    updated_at: '2025-10-01'
+  },
+  {
+    id: '2',
+    title: 'College Day 2025',
+    description: 'Grand annual college day celebration featuring cultural performances, award ceremonies, and alumni meet. The biggest event of the academic year.',
+    type: 'College Event',
+    status: 'Upcoming',
+    date: '2025-09-15',
+    team: 'College Administration',
+    cashbook_id: 'CB2025002',
+    media: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800',
+    created_at: '2025-08-01',
+    updated_at: '2025-09-01'
+  },
+  {
+    id: '3',
+    title: 'CS Department Fest - CodeFiesta',
+    description: 'Department technical fest with coding competitions, hackathons, tech talks, and project exhibitions. Open to all students.',
+    type: 'Department Fest',
+    status: 'Ongoing',
+    date: '2025-10-25',
+    team: 'Computer Science Department',
+    cashbook_id: 'CB2025003',
+    media: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800',
+    created_at: '2025-10-01',
+    updated_at: '2025-10-15'
+  },
+  {
+    id: '7',
+    title: 'Mechanical Fest - MechMania',
+    description: 'Annual technical fest of Mechanical Engineering department featuring robotics competitions, project exhibitions, and technical paper presentations.',
+    type: 'Department Fest',
+    status: 'Upcoming',
+    date: '2025-11-10',
+    team: 'Mechanical Department',
+    cashbook_id: 'CB2025001',
+    media: 'https://images.unsplash.com/photo-1581093450021-efdabf4ffdd9?w=800',
+    created_at: '2025-10-10',
+    updated_at: '2025-10-20'
+  },
+  {
+    id: '8',
+    title: 'Electronics Expo - ElectroVerve',
+    description: 'Showcasing innovative electronics projects, circuit design competitions, and workshops on emerging technologies in electronics.',
+    type: 'Department Fest',
+    status: 'Upcoming',
+    date: '2025-11-15',
+    team: 'Electronics Department',
+    cashbook_id: 'CB2025002',
+    media: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=800',
+    created_at: '2025-10-05',
+    updated_at: '2025-10-25'
+  },
+  {
+    id: '4',
+    title: 'Annual College Fest - Euphoria 2025',
+    description: 'Three-day mega college fest with celebrity performances, competitions, food stalls, and entertainment. The most awaited event of the year.',
+    type: 'College Fest',
+    status: 'Upcoming',
+    date: '2025-08-10',
+    team: 'Fest Organizing Committee',
+    cashbook_id: 'CB2025004',
+    media: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=800',
+    created_at: '2025-07-01',
+    updated_at: '2025-07-20'
+  },
+  {
+    id: '5',
+    title: 'Industrial Visit - Tech Park Bangalore',
+    description: 'Educational industrial visit to major tech companies in Bangalore. Includes company tours, interaction with professionals, and networking opportunities.',
+    type: 'IV Plan',
+    status: 'Completed',
+    date: '2025-09-10',
+    team: 'CS & IT Departments',
+    cashbook_id: 'CB2025005',
+    media: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800',
+    created_at: '2025-08-25',
+    updated_at: '2025-09-15'
+  },
+  {
+    id: '9',
+    title: 'IV - Automobile Manufacturing Plant',
+    description: 'Industrial visit to leading automobile manufacturing plant to understand modern production techniques and industry practices.',
+    type: 'IV Plan',
+    status: 'Upcoming',
+    date: '2025-11-20',
+    team: 'Mechanical & Automobile',
+    cashbook_id: 'CB2025003',
+    media: 'https://images.unsplash.com/photo-1601584115197-04ecc0da31d8?w=800',
+    created_at: '2025-10-15',
+    updated_at: '2025-10-30'
+  },
+  {
+    id: '10',
+    title: 'IV - Software Development Center',
+    description: 'Visit to a leading software development center to understand agile methodologies and software development life cycle.',
+    type: 'IV Plan',
+    status: 'Upcoming',
+    date: '2025-12-05',
+    team: 'Computer Science Department',
+    cashbook_id: 'CB2025004',
+    media: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800',
+    created_at: '2025-10-20',
+    updated_at: '2025-11-05'
+  },
+  {
+    id: '11',
+    title: 'Civil Engineering Site Visit',
+    description: 'Field visit to major construction site to observe modern construction techniques and project management practices.',
+    type: 'IV Plan',
+    status: 'Upcoming',
+    date: '2025-11-25',
+    team: 'Civil Engineering Department',
+    cashbook_id: 'CB2025005',
+    media: 'https://images.unsplash.com/photo-1581093450021-efdabf4ffdd9?w=800',
+    created_at: '2025-10-10',
+    updated_at: '2025-11-10'
+  },
+  {
+    id: '6',
+    title: 'Sports Day 2024',
+    description: 'Annual inter-department sports competition with various indoor and outdoor games. Promoting fitness and team spirit among students.',
+    type: 'College Event',
+    status: 'Completed',
+    date: '2025-08-20',
+    team: 'Sports Committee',
+    cashbook_id: 'CB2025001',
+    media: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800',
+    created_at: '2025-07-15',
+    updated_at: '2025-08-25'
+  },
+  {
+    id: '12',
+    title: 'Cultural Fest - Rhythm 2025',
+    description: 'Annual cultural extravaganza featuring dance, music, drama, and fine arts competitions from across the country.',
+    type: 'College Fest',
+    status: 'Upcoming',
+    date: '2025-12-15',
+    team: 'Cultural Committee',
+    cashbook_id: 'CB2025002',
+    media: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800',
+    created_at: '2025-11-01',
+    updated_at: '2025-11-20'
+  },
+  {
+    id: '13',
+    title: 'Tech Symposium 2025',
+    description: 'National level technical symposium with paper presentations, technical quizzes, and guest lectures from industry experts.',
+    type: 'College Event',
+    status: 'Upcoming',
+    date: '2025-12-01',
+    team: 'Technical Committee',
+    cashbook_id: 'CB2025003',
+    media: 'https://images.unsplash.com/photo-1454165804606-c3b57d1a8f5d?w=800',
+    created_at: '2025-11-05',
+    updated_at: '2025-11-25'
+  }
+];
+
+export const getFundData = (cashbookId) => {
+  return FUND_DATA[cashbookId] || {
+    fundsRaised: 0,
+    expenses: 0,
+    remainingBalance: 0,
+    transactions: []
+  };
+};
