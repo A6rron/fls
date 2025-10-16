@@ -202,6 +202,70 @@ const LandingPage = ({ onNavigate }) => {
             <p className="text-lg text-text-secondary leading-relaxed max-w-[700px] mx-auto font-normal">
               FLS uses <a href="https://cashbook.in/" target="_blank" rel="noopener noreferrer" className="text-accent-blue font-semibold hover:underline">Cashbook</a> as the financial backend. All donations go to the main account, volunteers get digital wallets, and every expense shows who paid—ensuring complete transparency and accountability.
             </p>
+
+            {/* Visual Diagram - College Day Example */}
+            <div className="mt-12 pt-10 border-t border-[rgba(255,255,255,0.1)]">
+              <h3 className="text-xl font-bold text-text-primary mb-3">Example: College Day Event</h3>
+              <p className="text-sm text-text-secondary mb-8">See how funds flow from the main account to volunteer wallets</p>
+              
+              <div className="max-w-[700px] mx-auto">
+                {/* Virtual Account */}
+                <div className="bg-card-bg border-2 border-accent-blue rounded-lg p-4 mb-6 text-center">
+                  <h4 className="text-base font-bold text-text-primary">Virtual Account</h4>
+                  <p className="text-xs text-text-secondary mb-2">College Day Event Fund</p>
+                  <p className="text-sm font-bold text-green-500">Balance: ₹60,000</p>
+                </div>
+
+                {/* Connecting Lines */}
+                <div className="flex justify-center mb-6">
+                  <div className="flex gap-12">
+                    <div className="w-px h-8 bg-accent-blue/50"></div>
+                    <div className="w-px h-8 bg-accent-blue/50"></div>
+                    <div className="w-px h-8 bg-accent-blue/50"></div>
+                  </div>
+                </div>
+
+                {/* Wallets */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {/* Volunteer Wallet A */}
+                  <div className="bg-card-bg border border-card-border rounded-lg p-4 text-center">
+                    <h5 className="text-sm font-bold text-text-primary mb-1">Arjun's Wallet</h5>
+                    <p className="text-xs text-text-secondary mb-3">Guest arrangement</p>
+                    <div className="pt-3 border-t border-[rgba(255,255,255,0.1)]">
+                      <p className="text-xs text-text-secondary">Guest Payment</p>
+                      <p className="text-xs font-semibold text-red-500 mt-1">₹15,000</p>
+                    </div>
+                  </div>
+
+                  {/* Volunteer Wallet B */}
+                  <div className="bg-card-bg border border-card-border rounded-lg p-4 text-center">
+                    <h5 className="text-sm font-bold text-text-primary mb-1">Meera's Wallet</h5>
+                    <p className="text-xs text-text-secondary mb-3">Catering Coordinator</p>
+                    <div className="pt-3 border-t border-[rgba(255,255,255,0.1)]">
+                      <p className="text-xs text-text-secondary">Food & Beverages</p>
+                      <p className="text-xs font-semibold text-red-500 mt-1">₹25,000</p>
+                    </div>
+                  </div>
+
+                  {/* Event Admin */}
+                  <div className="bg-card-bg border border-card-border rounded-lg p-4 text-center">
+                    <h5 className="text-sm font-bold text-text-primary mb-1">Vishnu's Wallet</h5>
+                    <p className="text-xs text-text-secondary mb-3">Overall Coordinator</p>
+                    <div className="pt-3 border-t border-[rgba(255,255,255,0.1)]">
+                      <p className="text-xs text-text-secondary">Sound & Stage</p>
+                      <p className="text-xs font-semibold text-red-500 mt-1">₹20,000</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Info Note */}
+                <div className="mt-6 bg-[rgba(74,158,255,0.05)] border border-accent-blue/30 rounded-lg p-3">
+                  <p className="text-xs text-text-secondary leading-relaxed">
+                    Volunteers make purchases directly from their Cashbook wallets. Every transaction is automatically synced to FLS, showing who made each payment and for what purpose—ensuring complete transparency.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
