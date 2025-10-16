@@ -1,27 +1,54 @@
 import React, { useState, useEffect } from 'react';
-import { MOCK_EVENTS, getFundData } from '../data/mockData';
+import { getEventById, getFundData } from '../services/dataService';
 import { formatDateLong, formatCurrency } from '../utils/formatters';
 
 const EventDetailsPage = ({ eventId, onBack }) => {
   const [event, setEvent] = useState(null);
   const [fundData, setFundData] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [currentFilter, setCurrentFilter] = useState('all');
   const [showReceipt, setShowReceipt] = useState(false);
   const [currentReceipt, setCurrentReceipt] = useState('');
+  const [imageError, setImageError] = useState(false);
 
   useEffect(() => {
-    if (eventId) {
-      const foundEvent = MOCK_EVENTS.find(e => e.id === eventId);
-      setEvent(foundEvent);
-      if (foundEvent) {
-        const funds = getFundData(foundEvent.cashbook_id);
-        setFundData(funds);
+    const loadEventData = async () => {
+      if (eventId) {
+        setLoading(true);
+        setImageError(false); // Reset image error for new event
+        try {
+          // Fetch event first (usually cached, so very fast)
+          const foundEvent = await getEventById(eventId);
+          setEvent(foundEvent);
+          
+          // Then fetch fund data (also benefits from cache)
+          if (foundEvent) {
+            const funds = await getFundData(foundEvent.cashbook_id);
+            setFundData(funds);
+          }
+          
+          setLoading(false);
+        } catch (error) {
+          console.error('Error loading event details:', error);
+          setLoading(false);
+        }
       }
-    }
+    };
+    loadEventData();
   }, [eventId]);
 
-  if (!event || !fundData) {
-    return null;
+  if (loading || !event || !fundData) {
+    return (
+      <div className="min-h-[calc(100vh-4rem)] py-12 flex items-center justify-center">
+        <div className="text-center">
+          <svg className="w-8 h-8 text-accent-blue-dark animate-spin mx-auto" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" opacity="0.25"></circle>
+            <path fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" opacity="0.75"></path>
+          </svg>
+          <p className="mt-4 text-text-secondary">Loading event details...</p>
+        </div>
+      </div>
+    );
   }
 
   const getStatusClass = (status) => {
@@ -72,9 +99,28 @@ const EventDetailsPage = ({ eventId, onBack }) => {
           Back to Events
         </button>
 
-        {event.media && (
+        {event.media && !imageError && (
           <div className="h-80 rounded-3xl overflow-hidden mb-8 shadow-[0_8px_30px_rgba(0,0,0,0.5)]">
-            <img src={event.media} alt={event.title} className="w-full h-full object-cover" />
+            <img 
+              src={event.media} 
+              alt={event.title} 
+              className="w-full h-full object-cover"
+              onError={() => setImageError(true)}
+              loading="lazy"
+            />
+          </div>
+        )}
+        
+        {event.media && imageError && (
+          <div className="h-80 rounded-3xl overflow-hidden mb-8 shadow-[0_8px_30px_rgba(0,0,0,0.5)] bg-gradient-to-br from-accent-blue/20 to-accent-slate/20 flex items-center justify-center border border-card-border">
+            <div className="text-center">
+              <svg className="w-16 h-16 text-text-muted mx-auto mb-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                <polyline points="21 15 16 10 5 21"></polyline>
+              </svg>
+              <p className="text-text-muted text-sm">Image unavailable</p>
+            </div>
           </div>
         )}
 

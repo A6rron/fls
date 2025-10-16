@@ -23,9 +23,6 @@ export default {
         'text-secondary': '#cbd5e1',
         'text-muted': '#64748b',
       },
-      fontFamily: {
-        'figtree': ['Figtree', 'sans-serif'],
-      },
     },
   },
   plugins: [],

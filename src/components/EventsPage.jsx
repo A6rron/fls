@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MOCK_EVENTS, getFundData } from '../data/mockData';
+import { getEventsWithFunds } from '../services/dataService';
 import { formatDate, formatCurrency } from '../utils/formatters';
 
 const EventsPage = ({ onViewDetails }) => {
@@ -11,23 +11,27 @@ const EventsPage = ({ onViewDetails }) => {
     loadEvents();
   }, []);
 
-  const loadEvents = () => {
+  const loadEvents = async () => {
     setLoading(true);
-    
-    // Simulate loading
-    setTimeout(() => {
-      const eventsData = MOCK_EVENTS;
+    try {
+      // ULTRA-FAST: Fetch everything in one go with caching
+      const { events: eventsData, cashbooks } = await getEventsWithFunds();
+      
       setEvents(eventsData);
       
-      // Load fund data for each event
+      // Create cache mapping event ID to funds raised
       const cache = {};
       eventsData.forEach(event => {
-        const funds = getFundData(event.cashbook_id);
-        cache[event.id] = funds.fundsRaised;
+        const cashbook = cashbooks.find(cb => cb.id === event.cashbook_id);
+        cache[event.id] = cashbook ? cashbook.funds_raised : 0;
       });
       setFundDataCache(cache);
+      
       setLoading(false);
-    }, 300);
+    } catch (error) {
+      console.error('Error loading events:', error);
+      setLoading(false);
+    }
   };
 
   const upcomingEvents = events.filter(e => e.status === 'Upcoming' || e.status === 'Ongoing');
