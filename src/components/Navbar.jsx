@@ -1,4 +1,5 @@
 import React from 'react';
+import logo from '../assets/logo.svg';
 
 const Navbar = ({ currentView, onNavigate }) => {
   return (
@@ -6,9 +7,9 @@ const Navbar = ({ currentView, onNavigate }) => {
       <div className="max-w-[1280px] mx-auto px-4 flex items-center justify-between h-16">
         <button
           onClick={() => onNavigate('landing')}
-          className="text-2xl font-bold text-text-primary hover:text-gray-400 transition-all duration-300 hover:scale-105"
+          className="flex items-center hover:opacity-80 transition-all duration-300 hover:scale-105"
         >
-          FLS
+          <img src={logo} alt="FLS Logo" className="h-10 w-auto" />
         </button>
         <div className="flex gap-6">
           <button
